@@ -50,7 +50,7 @@ class ArticlesController extends Controller
     /**
      * Save a new article.
      *
-     * @param CreateArticleRequest $request
+     * @param ArticleRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ArticleRequest $request)
@@ -67,7 +67,7 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Edit an article
+     * Edit an article.
      *
      * @param $id
      * @return \Illuminate\View\View
@@ -79,6 +79,13 @@ class ArticlesController extends Controller
         return view('articles/edit', compact('article'));
     }
 
+    /**
+     * Update an Article.
+     *
+     * @param $id
+     * @param ArticleRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update($id, ArticleRequest $request)
     {
         $article = Article::findOrFail($id);
