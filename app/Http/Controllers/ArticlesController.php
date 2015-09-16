@@ -55,13 +55,9 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        /*
-        store(Request $request)
-        2 method
-        $this->validate($request, ['title' => 'required', 'body' => 'required']);
-        */
+        $article = new Article($request->all());
 
-        Article::create($request->all());
+        \Auth::user()->articles()->save($article);
 
         return redirect('articles');
     }
