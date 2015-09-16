@@ -13,6 +13,16 @@ use App\Http\Controllers\Controller;
 class ArticlesController extends Controller
 {
     /**
+     * Construct loads middleware
+     * for article/create
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => 'create']);
+    }
+
+    /**
      * Show all articles.
      *
      * @return \Illuminate\View\View

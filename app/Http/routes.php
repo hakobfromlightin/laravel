@@ -24,3 +24,7 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('foo', ['middleware' => 'manager', function(){
+    return 'This page may be viewed only by managers';
+}]);
