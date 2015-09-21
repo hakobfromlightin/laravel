@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -63,9 +64,11 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $article = new Article($request->all());
+        Auth::user()->articles()->create($request->all());
+//        $article = new Article($request->all());
+//        Auth::user()->articles()->save($article);
 
-        \Auth::user()->articles()->save($article);
+        flash()->overlay('Your article has been created', 'Good Job');
 
         return redirect('articles');
     }
