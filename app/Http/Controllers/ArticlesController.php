@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use App\Tag;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -14,8 +15,7 @@ use App\Http\Controllers\Controller;
 class ArticlesController extends Controller
 {
     /**
-     * Construct loads middleware
-     * for article/create
+     * Create a new articles controller instance.
      *
      */
     public function __construct()
@@ -53,7 +53,8 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles/create', compact('article'));
+        $tags = Tag::lists('name', 'id');
+        return view('articles/create', compact('tags'));
     }
 
     /**
@@ -64,11 +65,9 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        Auth::user()->articles()->create($request->all());
-//        $article = new Article($request->all());
-//        Auth::user()->articles()->save($article);
+        $this->createArticle($request);
 
-        flash()->overlay('Your article has been created', 'Good Job');
+        flash('Your article has been created');
 
         return redirect('articles');
     }
@@ -81,7 +80,9 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles/edit', compact('article'));
+        $tags = Tag::lists('name', 'id');
+
+        return view('articles/edit', compact('article', 'tags'));
     }
 
     /**
@@ -94,6 +95,34 @@ class ArticlesController extends Controller
     public function update(Article $article, ArticleRequest $request)
     {
         $article->update($request->all());
+
+        $this->syncTags($article, $request->input('tag_list'));
+
         return redirect('articles');
+    }
+
+    /**
+     * Sync up the list of tags in the database.
+     * @param Article $article
+     * @param array $tags
+     */
+    private function syncTags(Article $article, array $tags)
+    {
+        $article->tags()->sync($tags);
+    }
+
+    /**
+     * Save a new article.
+     *
+     * @param ArticleRequest $request
+     * @return mixed
+     */
+    private function createArticle(ArticleRequest $request)
+    {
+        $article = Auth::user()->articles()->create($request->all());
+
+        $this->syncTags($article, $request->input('tag_list'));
+
+        return $article;
     }
 }
