@@ -28,3 +28,7 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+Route::post('search-results', function(){
+    return sprintf('Search results for "%s"', Request::input('search'));
+});

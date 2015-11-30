@@ -37,9 +37,11 @@
     </head>
     <body>
         <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+            <form action="/search-results" method="POST">
+                <input type="text" name="_token" value="{{ csrf_token() }}">
+                <input type="text" id="search" name="search">
+                <button type="submit">Search</button>
+            </form>
         </div>
     </body>
 </html>
