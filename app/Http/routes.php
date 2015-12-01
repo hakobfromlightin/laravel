@@ -32,3 +32,7 @@ Route::controllers([
 Route::post('search-results', function(){
     return sprintf('Search results for "%s"', Request::input('search'));
 });
+
+Route::get('posts', function(){
+    return view('posts/posts')->with('posts', App\Post::all());
+});

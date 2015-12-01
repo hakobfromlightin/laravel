@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        factory(User::class, 50)->create();
 
         Model::reguard();
     }
