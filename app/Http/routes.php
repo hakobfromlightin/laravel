@@ -29,10 +29,20 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-Route::post('search-results', function(){
+Route::post('search-results', function () {
     return sprintf('Search results for "%s"', Request::input('search'));
 });
 
-Route::get('posts', function(){
+Route::get('posts', function () {
     return view('posts/posts')->with('posts', App\Post::all());
+});
+
+Route::get('admin', ['middleware' => 'admin:Jake', function () {
+    return 'Hello Jake';
+}]);
+
+Route::group(['prefix' => 'admin', 'as' => 'Admin::'], function () {
+    Rout::get('home', ['as' => 'home', function () {
+        return 'some view';
+    }]);
 });

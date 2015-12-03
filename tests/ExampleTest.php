@@ -6,6 +6,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
+
+    use DatabaseTransactions;
+
+
     /**
      * A basic functional test example.
      *
@@ -13,10 +17,10 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        $this->visit('/')
-             ->type('some query', '#search')
-             ->press('Search')
-             ->see('Search results for "some query"')
-             ->onPage('/search-results');
+        $jake = factory('App\User')->create(['name' => 'Jake', 'password' => bcrypt('password')]);
+
+        $this->actingAs($jake)
+            ->visit('admin')
+            ->see('Hello Jake');
     }
 }

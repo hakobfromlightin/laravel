@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        factory(User::class, 50)->create();
+        factory(User::class, 10)->create();
+        factory(User::class, 5)->create(['password' => bcrypt('password')]);
 
         Model::reguard();
     }
