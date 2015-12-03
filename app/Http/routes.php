@@ -24,10 +24,10 @@ Route::resource('articles', 'ArticlesController');
 
 Route::get('tags/{tags}', 'TagsController@show');
 
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
+//Route::controllers([
+//    'auth' => 'Auth\AuthController',
+//    'password' => 'Auth\PasswordController',
+//]);
 
 Route::post('search-results', function () {
     return sprintf('Search results for "%s"', Request::input('search'));
@@ -42,7 +42,12 @@ Route::get('admin', ['middleware' => 'admin:Jake', function () {
 }]);
 
 Route::group(['prefix' => 'admin', 'as' => 'Admin::'], function () {
-    Rout::get('home', ['as' => 'home', function () {
+    Route::get('home', ['as' => 'home', function () {
         return 'some view';
     }]);
 });
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');

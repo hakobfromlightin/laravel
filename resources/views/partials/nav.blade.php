@@ -15,9 +15,11 @@
                 <li><a href="/articles">Articles</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>{!! link_to_action('ArticlesController@show', $latest->title, [$latest->id]) !!}</li>
-            </ul>
+            @if($latest)
+                <ul class="nav navbar-nav navbar-right">
+                    <li>{!! link_to_action('ArticlesController@show', $latest->title, [$latest->id]) !!}</li>
+                </ul>
+            @endif
         </div>
     </div>
 </nav>
