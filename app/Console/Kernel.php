@@ -24,7 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        $schedule->exec('');
+//        $schedule->command('laracasts:clear-history')->monthly()->sendOutputTo('path/to/file')->emailOutputTo('admin@admin.com')->thenPing('google.com');
+//        $schedule->command('laracasts:daily-report')->dailyAt('23:55');
     }
 }

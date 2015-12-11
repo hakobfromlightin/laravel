@@ -11,9 +11,28 @@
 |
 */
 
+use App\Events\UserWasBanned;
+
 Route::get('foo', 'FooController@foo');
 
 Route::get('/', function () {
+
+    /**
+     * Dump Config Contracts.
+     */
+//    dd(Config::get('database.default'));
+//    dd(app('Illuminate\Config\Repository')['database']['default']);
+//    dd(app('Illuminate\Contracts\Config\Repository')['database']['default']);
+//    dd(app('config')['database']['default']);
+//    dd(app()['config']['database']['default']);
+
+    /**
+     * Fire an event
+     */
+//    $user = new App\User;
+//    event(new UserWasBanned($user));
+
+
     return view('welcome');
 });
 
@@ -28,3 +47,5 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+get('test', 'ContractsTestController@test');
