@@ -19,7 +19,7 @@ class ContractsTestController extends Controller
     }*/
 
 //    public function test(Repository $config) //method injection
-    public function test()
+    public function config()
     {
         // constructor injection
 //        return $this->config->get('database.default');
@@ -34,7 +34,5 @@ class ContractsTestController extends Controller
 
         // config helper function
         return config('database.default'); //recommended
-
-
     }
 }

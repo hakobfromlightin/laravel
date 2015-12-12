@@ -17,6 +17,13 @@ Route::get('foo', 'FooController@foo');
 
 Route::get('/', function () {
 
+//    dd(Hash::make('password'));
+//    dd(bcrypt('password'));
+    dd(app('hash')->make('password'));
+//    dd(app()['hash']->make('password'));
+//    dd(app('Illuminate\Hashing\BcryptHasher')->make('password'));
+//    dd(app('Illuminate\Contracts\Hashing\Hasher')->make('password'));
+
     /**
      * Dump Config Contracts.
      */
@@ -48,4 +55,4 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-get('test', 'ContractsTestController@test');
+get('config', 'ContractsTestController@config');
