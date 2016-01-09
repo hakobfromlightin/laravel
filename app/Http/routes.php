@@ -13,13 +13,11 @@
 
 use App\Events\UserWasBanned;
 
-Route::get('foo', 'FooController@foo');
-
 Route::get('/', function () {
 
 //    dd(Hash::make('password'));
 //    dd(bcrypt('password'));
-    dd(app('hash')->make('password'));
+//    dd(app('hash')->make('password'));
 //    dd(app()['hash']->make('password'));
 //    dd(app('Illuminate\Hashing\BcryptHasher')->make('password'));
 //    dd(app('Illuminate\Contracts\Hashing\Hasher')->make('password'));
@@ -32,16 +30,10 @@ Route::get('/', function () {
 //    dd(app('Illuminate\Contracts\Config\Repository')['database']['default']);
 //    dd(app('config')['database']['default']);
 //    dd(app()['config']['database']['default']);
-
-    /**
-     * Fire an event
-     */
-//    $user = new App\User;
-//    event(new UserWasBanned($user));
-
-
     return view('welcome');
 });
+
+Route::get('foo', 'FooController@foo');
 
 Route::get('contact', 'PagesController@contact');
 Route::get('about', 'PagesController@about');
@@ -55,4 +47,27 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-get('config', 'ContractsTestController@config');
+Route::get('config', 'ContractsTestController@config');
+
+Route::get('subscriber', ['middleware' => 'subscriber', function(){
+    return 'You are watching subscriber info!';
+}]);
+
+Route::get('login', function () {
+
+    $user = App\User::create([
+        'name'  => 'JohnDoe',
+        'email' => 'john@example.com',
+        'password' => bcrypt('password'),
+        'plan' => 'monthly'
+    ]);
+
+    Auth::login($user);
+
+    /**
+     * Fire an event
+     */
+//    event(new UserWasBanned($user));
+
+    return redirect('/');
+});

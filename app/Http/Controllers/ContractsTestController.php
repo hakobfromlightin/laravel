@@ -7,29 +7,29 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-//use Config; //facade
+use Config; //facade
 
 class ContractsTestController extends Controller
 {
-/*    protected $config; //constructor injection
+   protected $config; //constructor injection
 
     public function __construct(Repository $config)
     {
         $this->config = $config;
-    }*/
+    }
 
-//    public function test(Repository $config) //method injection
-    public function config()
+    public function test(Repository $config) //method injection
+//    public function config()
     {
         // constructor injection
-//        return $this->config->get('database.default');
+        return $this->config->get('database.default');
 
         // method injection
-//        return $config->get('database.default');
+        return $config->get('database.default');
 
 
         // facade
-//        return Config::get('database.default');
+        return Config::get('database.default');
 
 
         // config helper function

@@ -25,6 +25,6 @@ class EmailBandNotification implements ShouldQueue
      */
     public function handle(UserWasBanned $event)
     {
-        var_dump('Notify ' . $event->user->name . ' that they have been banned from the site.');
+        dd('Notify ' . $event->user->name . ' that they have been banned from the site.');
     }
 }
